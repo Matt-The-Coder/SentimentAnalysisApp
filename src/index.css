@@ -1,0 +1,22 @@
+
+*{
+  color: #3b3c36;
+  scroll-behavior: smooth
+}
+
+.footer * {
+  color: whitesmoke 
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.nav{
+  transform: translateY(-1000px);
+  transition: ease-in 0.5s ;
+}
+
+.nav.open{
+  transform: translateY(0px);
+}
