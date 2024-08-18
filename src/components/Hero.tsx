@@ -11,7 +11,8 @@ import FormControl from '@mui/material/FormControl';
 import { TypeAnimation } from 'react-type-animation';
 
 export const Hero = () => {
-    const [inputText, setInputText] = useState("")
+    const [inputTagalogText, setInputTagalogText] = useState("")
+    const [inputEnglishText, setInputEnglishText] = useState("")
     // const [language, setLanguage] = useState('')
     // const [typeError, setTypeError] = useState(false)
     const [result, setResult] = useState<AnalysisResult>({
@@ -33,8 +34,7 @@ export const Hero = () => {
         const sentiment = new Sentiment()
         var tlLanguage = data
         sentiment.registerLanguage('tl', tlLanguage)
-        // const tagalogResult = sentiment.analyze(inputText, { language: 'tl' })
-        const englishResult = sentiment.analyze(inputText, { language: 'en' })
+        const englishResult = sentiment.analyze(inputEnglishText, { language: 'en' })
         // if (language == "tl") {
         //     setResult(tagalogResult)
         //     console.log(tagalogResult)
@@ -42,8 +42,28 @@ export const Hero = () => {
             setResult(englishResult)
         
 
-    }, [inputText])
+    }, [inputEnglishText])
 
+    useEffect(() => {
+        // if (language == '') {
+        //     setTypeError(true)
+        //     setTimeout(() => {
+        //         setTypeError(false)
+        //     }, 1000)
+        // }
+        const sentiment = new Sentiment()
+        var tlLanguage = data
+        sentiment.registerLanguage('tl', tlLanguage)
+        const tagalogResult = sentiment.analyze(inputTagalogText, { language: 'tl' })
+        // if (language == "tl") {
+        //     setResult(tagalogResult)
+        //     console.log(tagalogResult)
+        // } else if (language == "en") { }
+        console.log(tagalogResult)
+            setResult(tagalogResult)
+        
+
+    }, [inputTagalogText])
     return (
         <div className="hero flex sm:py-14 py-20 sm:px-20 mt-10 sm:mt-18" id='home'>
             <div className="section1 sm:w-1/2 w-full flex flex-col gap-5 px-6 sm:py-10 justify-center">
@@ -83,8 +103,17 @@ export const Hero = () => {
                 </Box>
                 <Box sx={{ minWidth: 120 }}>
                     <FormControl fullWidth>
-                        <TextField id="standard-basic" onChange={(e) => { setInputText(e.currentTarget.value) }}
-                            label="Enter your statement" variant="standard" />
+                        <TextField id="standard-basic" onChange={(e) => { setInputEnglishText(e.currentTarget.value) }}
+                            label="Enter your English Feedback" variant="standard" />
+                        {/* {typeError && <p className='text-red-500 mt-5'>Please select a language first!</p>} */}
+
+                    </FormControl>
+
+                </Box>
+                <Box sx={{ minWidth: 120 }}>
+                    <FormControl fullWidth>
+                        <TextField id="standard-basic" onChange={(e) => { setInputTagalogText(e.currentTarget.value) }}
+                            label="Enter your Tagalog Feedback" variant="standard" />
                         {/* {typeError && <p className='text-red-500 mt-5'>Please select a language first!</p>} */}
 
                     </FormControl>
