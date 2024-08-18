@@ -4,16 +4,16 @@ import TextField from '@mui/material/TextField';
 import ReactSpeedometer from "react-d3-speedometer"
 import data from '../assets/tagalogWords.json'
 import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
+// import InputLabel from '@mui/material/InputLabel';
+// import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select  from '@mui/material/Select';
+// import Select  from '@mui/material/Select';
 import { TypeAnimation } from 'react-type-animation';
 
 export const Hero = () => {
     const [inputText, setInputText] = useState("")
-    const [language, setLanguage] = useState('')
-    const [typeError, setTypeError] = useState(false)
+    // const [language, setLanguage] = useState('')
+    // const [typeError, setTypeError] = useState(false)
     const [result, setResult] = useState<AnalysisResult>({
         score: 0,
         comparative: 0,
@@ -24,12 +24,12 @@ export const Hero = () => {
         negative: [],
       });
     useEffect(() => {
-        if (language == '') {
-            setTypeError(true)
-            setTimeout(() => {
-                setTypeError(false)
-            }, 1000)
-        }
+        // if (language == '') {
+        //     setTypeError(true)
+        //     setTimeout(() => {
+        //         setTypeError(false)
+        //     }, 1000)
+        // }
         const sentiment = new Sentiment()
         var tlLanguage = data
         sentiment.registerLanguage('tl', tlLanguage)
