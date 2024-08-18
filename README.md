@@ -1,5 +1,20 @@
 # React + TypeScript + Vite
 
+Prerequisite Tools:
+1. Node JS
+2. GIT
+3. Yarn
+4. Visual Studio Code
+
+To run the following app:
+
+1. Clone this repository
+2. Open your terminal and be in the root folder of this app
+3. Run (yarn install)
+4. Run (yarn dev)
+5. Open the app.
+
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
