@@ -1,10 +1,12 @@
-import React, { useRef, useState } from "react"
+import { useRef, MutableRefObject} from "react"
 
 export const Header = () => {
 
-    const nav = useRef(null)
+  const nav: MutableRefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
     const toggleNav = () => {
-        nav.current.classList.toggle('open')
+        if(nav.current){
+          nav.current.classList.toggle('open')
+        }
     }
     return(
         <>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import Sentiment from 'sentiment'
+import Sentiment, { AnalysisResult } from 'sentiment';
 import TextField from '@mui/material/TextField';
 import ReactSpeedometer from "react-d3-speedometer"
 import data from '../assets/tagalogWords.json'
@@ -7,14 +7,22 @@ import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select  from '@mui/material/Select';
 import { TypeAnimation } from 'react-type-animation';
 
 export const Hero = () => {
-    const [inputText, setInputText] = useState()
+    const [inputText, setInputText] = useState("")
     const [language, setLanguage] = useState('')
     const [typeError, setTypeError] = useState(false)
-    const [result, setResult] = useState({ calculation: "", score: 0, positive: [], negative: [], tokens: [] })
+    const [result, setResult] = useState<AnalysisResult>({
+        score: 0,
+        comparative: 0,
+        calculation: [],
+        tokens: [],
+        words: [],
+        positive: [],
+        negative: [],
+      });
     useEffect(() => {
         if (language == '') {
             setTypeError(true)
@@ -25,14 +33,14 @@ export const Hero = () => {
         const sentiment = new Sentiment()
         var tlLanguage = data
         sentiment.registerLanguage('tl', tlLanguage)
-        const tagalogResult = sentiment.analyze(inputText, { language: 'tl' })
+        // const tagalogResult = sentiment.analyze(inputText, { language: 'tl' })
         const englishResult = sentiment.analyze(inputText, { language: 'en' })
-        if (language == "tl") {
-            setResult(tagalogResult)
-            console.log(tagalogResult)
-        } else if (language == "en") {
+        // if (language == "tl") {
+        //     setResult(tagalogResult)
+        //     console.log(tagalogResult)
+        // } else if (language == "en") { }
             setResult(englishResult)
-        }
+        
 
     }, [inputText])
 
@@ -55,29 +63,29 @@ export const Hero = () => {
                     style={{ fontSize: '2rem', display: 'inline-block' }}
                     repeat={Infinity}
                 />
-                {typeError && <p className='font-semibold text-xl'>Pick a Language</p>}
+                {/* {typeError && <p className='font-semibold text-xl'>Pick a Language</p>} */}
 
                 <Box sx={{ minWidth: 120 }}>
-                    <FormControl fullWidth>
+                    {/* <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">Language</InputLabel>
                         <Select
                             required
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            onChange={(event) => setLanguage(event.target.value)}
+                            onChange={(event: React.ChangeEvent<HTMLSelectElement>) => setLanguage(event.target.value)}
                             label="Language"
                         >
                             <MenuItem value={"en"}>English</MenuItem>
                             <MenuItem value={"tl"}>Tagalog</MenuItem>
                         </Select>
-                    </FormControl>
+                    </FormControl> */}
 
                 </Box>
                 <Box sx={{ minWidth: 120 }}>
                     <FormControl fullWidth>
                         <TextField id="standard-basic" onChange={(e) => { setInputText(e.currentTarget.value) }}
                             label="Enter your statement" variant="standard" />
-                        {typeError && <p className='text-red-500 mt-5'>Please select a language first!</p>}
+                        {/* {typeError && <p className='text-red-500 mt-5'>Please select a language first!</p>} */}
 
                     </FormControl>
 
@@ -154,28 +162,24 @@ export const Hero = () => {
                         customSegmentLabels={[
                             {
                                 text: 'Very Bad',
-                                position: 'INSIDE',
                                 color: '#555',
                             },
                             {
                                 text: 'Bad',
-                                position: 'INSIDE',
                                 color: '#555',
                             },
                             {
                                 text: 'Good',
-                                position: 'INSIDE',
                                 color: '#555',
                             },
                             {
                                 text: 'Very Good',
-                                position: 'INSIDE',
                                 color: '#555',
                             },
                         ]}
                         ringWidth={47}
                         needleTransitionDuration={3333}
-                        needleTransition="easeElastic"
+                        // needleTransition="easeElastic"
                         needleColor={'#3b3c36 '}
                         textColor={'#3b3c36'}
                     />
