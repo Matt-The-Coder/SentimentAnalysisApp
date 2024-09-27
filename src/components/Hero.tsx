@@ -34,7 +34,7 @@ export const Hero:React.FC<IHero> = ({setIsLoading}) => {
         sentiment.registerLanguage('tl', tlLanguage)
         const englishResult = sentiment.analyze(selectEnglishText, { language: 'en' })
         setResult(englishResult)
-
+        console.log(englishResult)
 
     }, [selectEnglishText])
 
@@ -154,8 +154,10 @@ export const Hero:React.FC<IHero> = ({setIsLoading}) => {
                     <div className='section1 h-auto flex flex-col gap-10 justify-between py-5 sm:py-10 sm:px-10 px-5 border shadow-1xl rounded-lg'>
                         <p className='text-right sm:px-10 font-semibold text-md'>Analysis Result</p>
                         <div className="flex flex-col gap-5 w-full">
-                            <p className=' font-medium'>Emotion Status                         {result.score === 0 ? <label >😐</label> : result.score < 0 && result.score >= -3 ? <label>☹️</label> :
+                            <p className=' font-medium'>Emotion Status                        
+                                 {result.score === 0 ? <label >😐</label> : result.score < 0 && result.score >= -3 ? <label>☹️</label> :
                                 result.score < -3 ? <label>😭</label> : result.score > 0 && result.score <= 3 ? <label>😊</label> : <label>🥰</label>}</p>
+                                <p className='font-medium'>Result: {result.score==0?(<label>Netural</label>):result.score>0?(<label>Positive</label>):(<label>Negative</label>)}</p>
                             <p className='font-medium'>Words: {result.tokens ?
                                 result.tokens.map((e, i) => {
                                     if (i == result.tokens.length - 1) {
@@ -188,7 +190,7 @@ export const Hero:React.FC<IHero> = ({setIsLoading}) => {
                                     return (
                                         <label key={i}>{e}, </label>)
                                 }) : null}</p>
-                            <p className='font-medium'>Comparative {result.comparative}</p>
+                            <p className='font-medium'>Comparative {result.comparative?.toFixed(2)}</p>
                             <p className='font-medium'>Score: {result.score}</p>
 
 
